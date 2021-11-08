@@ -14,7 +14,7 @@ def set_bounds(lst: list, search_str: str, first: bool) -> int:
     except ValueError:
         if search_str != "":
             print("string not found; using default")
-        return 0 if first else len(lst) - 1
+        return 0 if first else len(lst)
 
 
 def game(MEMORY_DICT, first, last):
@@ -22,8 +22,9 @@ def game(MEMORY_DICT, first, last):
     cycles = 0
     keys = list(MEMORY_DICT.keys())
 
-    keys = keys[set_bounds(keys, first, True):set_bounds(keys, last, False)]
+    keys = keys[set_bounds(keys, first, True):set_bounds(keys, last, False)+1]
     while True:
+        cycles += 1
         for random_value in shuffle(keys):
             real_answers = MEMORY_DICT[random_value]
             answer = input(f"what is the value associated with {random_value}: ")
@@ -41,7 +42,6 @@ def game(MEMORY_DICT, first, last):
                 cycles = 0
                 print(f"False! The correct answer was any of: {real_answers}")
                 break
-        cycles += 1
         print(f"Cycle! Total cycles: {cycles}")
 
 
