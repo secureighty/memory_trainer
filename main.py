@@ -1,16 +1,30 @@
 import json
 import random
 
+
 def shuffle(lst):
     new_lst = lst.copy()
     random.shuffle(new_lst)
     return new_lst
 
-def game(MEMORY_DICT):
+
+def set_bounds(lst: list, search_str: str, first: bool) -> int:
+    try:
+        return lst.index(search_str)
+    except ValueError:
+        if search_str != "":
+            print("string not found; using default")
+        return 0 if first else len(lst) - 1
+
+
+def game(MEMORY_DICT, first, last):
     score = 0
     cycles = 0
+    keys = list(MEMORY_DICT.keys())
+
+    keys = keys[set_bounds(keys, first, True):set_bounds(keys, last, False)]
     while True:
-        for random_value in shuffle(list(MEMORY_DICT)):
+        for random_value in shuffle(keys):
             real_answers = MEMORY_DICT[random_value]
             answer = input(f"what is the value associated with {random_value}: ")
 
@@ -33,8 +47,10 @@ def game(MEMORY_DICT):
 
 def main():
     try:
-        MEMORY_DICT = json.loads(open("dicts/"+input("json memory dictionary file name: ")).read())
-        game(MEMORY_DICT)
+        MEMORY_DICT = json.loads(open("dicts/" + input("json memory dictionary file name: ")).read())
+        first = input("starting key? leave blank for first key:")
+        last = input("ending key? leave blank for last key:")
+        game(MEMORY_DICT, first, last)
     except FileNotFoundError:
         print("file not found")
         main()
