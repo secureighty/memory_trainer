@@ -32,8 +32,12 @@ def game(MEMORY_DICT):
 
 
 def main():
-    MEMORY_DICT = json.loads(open("dicts/"+input("json memory dictionary file name: ")).read())
-    game(MEMORY_DICT)
+    try:
+        MEMORY_DICT = json.loads(open("dicts/"+input("json memory dictionary file name: ")).read())
+        game(MEMORY_DICT)
+    except FileNotFoundError:
+        print("file not found")
+        main()
 
 
 main()
