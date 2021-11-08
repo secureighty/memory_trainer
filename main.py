@@ -24,6 +24,7 @@ def game(MEMORY_DICT):
                 print(f"Correct! Score:{score}")
             else:
                 score = 0
+                cycles = 0
                 print(f"False! The correct answer was any of: {real_answers}")
                 break
         cycles += 1
