@@ -42,7 +42,8 @@ def game(MEMORY_DICT, first, last):
                 cycles = 0
                 print(f"False! The correct answer was any of: {real_answers}")
                 break
-        print(f"Cycle! Total cycles: {cycles}")
+        if cycles:
+            print(f"Cycle! Total cycles: {cycles}")
 
 
 def main():
