@@ -40,7 +40,7 @@ def game(MEMORY_DICT, first, last):
             else:
                 score = 0
                 cycles = 0
-                print(f"False! The correct answer was any of: {real_answers}")
+                print(f"False! The correct answer was any of: {', '.join(real_answers)}")
                 break
         if cycles:
             print(f"Cycle! Total cycles: {cycles}")
